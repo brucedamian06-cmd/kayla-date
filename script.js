@@ -85,6 +85,16 @@ noBtn.addEventListener("click", moveButton);
 // YES button
 yesBtn.onclick = () => {
 
+    // Submit YES to Google Form
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLSf7RiDJsJVYdJdu-R4sRBull-8Yo-EA8xUCM6SbjH8Ad84XBg/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "entry.1794546234=Yes"
+    });
+
     question.classList.add("hidden");
     message.style.display = "none";
 
