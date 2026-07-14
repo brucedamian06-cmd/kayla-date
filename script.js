@@ -34,14 +34,19 @@ continueBtn.onclick = () => {
     }, 700);
 };
 
-// Make the "No" button run away
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("touchstart", moveButton);
+// Make the "No" button impossible to press
+let escapes = 0;
 
-function moveButton() {
+function moveButton(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
 
-    const maxX = card.clientWidth - noBtn.offsetWidth - 30;
-    const maxY = card.clientHeight - noBtn.offsetHeight - 30;
+    const cardRect = card.getBoundingClientRect();
+
+    const maxX = cardRect.width - noBtn.offsetWidth - 20;
+    const maxY = cardRect.height - noBtn.offsetHeight - 20;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
@@ -49,7 +54,33 @@ function moveButton() {
     noBtn.style.position = "absolute";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
+
+    escapes++;
+
+    if (escapes === 5) {
+        noBtn.textContent = "😜";
+    }
+
+    if (escapes === 8) {
+        noBtn.style.transform = "scale(0.6)";
+    }
+
+    if (escapes >= 10) {
+        noBtn.style.display = "none";
+
+        yesBtn.style.transform = "scale(1.3)";
+        yesBtn.textContent = "YES ❤️";
+    }
 }
+
+["mouseenter","mousemove","mouseover","touchstart","touchmove","click"].forEach(event=>{
+    noBtn.addEventListener(event, moveButton, { passive:false });
+});
+
+
+noBtn.addEventListener("mouseenter", moveButton);
+noBtn.addEventListener("touchstart", moveButton, { passive: false });
+noBtn.addEventListener("click", moveButton);
 
 // YES button
 yesBtn.onclick = () => {
