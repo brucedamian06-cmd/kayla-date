@@ -9,7 +9,7 @@ const noBtn = document.getElementById("noBtn");
 
 const card = document.querySelector(".card");
 
-const text = "Hey Kayla ❤️";
+const text = "Hey Kayla ";
 
 let i = 0;
 
@@ -69,7 +69,7 @@ function moveButton(e) {
         noBtn.style.display = "none";
 
         yesBtn.style.transform = "scale(1.3)";
-        yesBtn.textContent = "YES ❤️";
+        yesBtn.textContent = "YES ";
     }
 }
 
@@ -117,7 +117,7 @@ setInterval(() => {
 
     heart.classList.add("heart");
 
-    heart.innerHTML = "❤";
+    heart.innerHTML = "";
 
     heart.style.left = Math.random() * 100 + "%";
 
